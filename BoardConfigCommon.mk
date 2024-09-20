@@ -88,12 +88,9 @@ LOC_HIDL_VERSION := 3.0
 TARGET_FS_CONFIG_GEN := $(COMMON_PATH)/config.fs
 
 # HIDL
-DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := \
-    $(COMMON_PATH)/framework_compatibility_matrix.xml \
-    hardware/qcom-caf/common/vendor_framework_compatibility_matrix.xml \
-    hardware/qcom-caf/common/vendor_framework_compatibility_matrix_legacy.xml \
-DEVICE_MATRIX_FILE := $(COMMON_PATH)/compatibility_matrix.xml
-
+DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := $(DEVICE_PATH)/framework_compatibility_matrix.xml
+DEVICE_MATRIX_FILE := $(DEVICE_PATH)/compatibility_matrix.xml
+DEVICE_MANIFEST_FILE := $(DEVICE_PATH)/manifest.xml
 # Init
 TARGET_INIT_VENDOR_LIB := //$(COMMON_PATH):libinit_msm8953
 TARGET_RECOVERY_DEVICE_MODULES := libinit_msm8953
