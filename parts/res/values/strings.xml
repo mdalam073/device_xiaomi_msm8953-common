@@ -16,6 +16,11 @@ This is my res/values/strings.xml
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+     <string name="thermal_title">Thermal Settings</string>
+<string name="thermal_summary">Configure thermal profiles</string>
+<string name="refresh_title">Refresh Rate Settings</string>
+<string name="refresh_summary">Adjust screen refresh rate</string>
+     
     <!-- Ambient settings -->
     <string name="ambient_enable">Use Ambient Display</string>
 
