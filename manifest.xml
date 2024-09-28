@@ -1,4 +1,11 @@
 <manifest version="2.0" type="device" target-level="5">
+  <hal format="hidl">
+    <name>android.hardware.foo</name>
+    <version>1.0</version>
+    <transport>default</transport>
+  </hal>
+  ...
+  <fcm-version>5</fcm-version> <!-- Ensure you declare the FCM version -->
     <hal format="hidl">
         <name>android.hardware.audio</name>
         <transport>hwbinder</transport>
