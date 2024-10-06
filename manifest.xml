@@ -1,17 +1,13 @@
-<manifest version="1.0" type="device" target-level="5">
-  <hal format="hidl">
-    <name>android.hardware.foo</name>
-    <version>1.0</version>
-    <transport>default</transport>
-  </hal>
-  ...
+<<manifest version="1.0" type="device" target-level="5">
   <fcm-version>5</fcm-version> <!-- Ensure you declare the FCM version -->
-    <hal format="hidl">
-        <name>android.hardware.audio</name>
-        <transport>hwbinder</transport>
-        <fqname>@6.0::IDevicesFactory/default</fqname>
-    </hal>
-    <hal format="hidl">
+
+  <hal format="hidl">
+    <name>android.hardware.audio</name>
+    <transport>hwbinder</transport>
+    <fqname>@6.0::IDevicesFactory/default</fqname>
+  </hal>
+
+  <hal format="hidl">
         <name>android.hardware.audio.effect</name>
         <transport>hwbinder</transport>
         <fqname>@6.0::IEffectsFactory/default</fqname>
