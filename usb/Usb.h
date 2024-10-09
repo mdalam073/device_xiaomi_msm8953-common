@@ -16,11 +16,11 @@
 namespace android {
 namespace hardware {
 namespace usb {
-namespace V1_0 {
+namespace V1_3 {
 namespace implementation {
 
-using ::android::hardware::usb::V1_0::IUsb;
-using ::android::hardware::usb::V1_0::IUsbCallback;
+using ::android::hardware::usb::V1_3::IUsb;
+using ::android::hardware::usb::V1_3::IUsbCallback;
 using ::android::hardware::usb::V1_0::PortRole;
 using ::android::hidl::base::V1_0::IBase;
 using ::android::hardware::hidl_array;
