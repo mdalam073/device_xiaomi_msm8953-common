@@ -10,7 +10,7 @@
 #undef LOG_TAG
 #endif
 
-#define LOG_TAG "android.hardware.usb@1.0-service.msm8953"
+#define LOG_TAG "android.hardware.usb@1.3-service.msm8953"
 #define UEVENT_MSG_LEN 2048
 
 namespace android {
@@ -21,7 +21,7 @@ namespace implementation {
 
 using ::android::hardware::usb::V1_3::IUsb;
 using ::android::hardware::usb::V1_3::IUsbCallback;
-using ::android::hardware::usb::V1_0::PortRole;
+using ::android::hardware::usb::V1_3::PortRole;
 using ::android::hidl::base::V1_0::IBase;
 using ::android::hardware::hidl_array;
 using ::android::hardware::hidl_memory;
@@ -41,7 +41,7 @@ struct Usb : public IUsb {
 };
 
 }  // namespace implementation
-}  // namespace V1_0
+}  // namespace V1_3
 }  // namespace usb
 }  // namespace hardware
 }  // namespace android
