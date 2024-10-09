@@ -27,7 +27,7 @@
 namespace android {
 namespace hardware {
 namespace usb {
-namespace V1_0 {
+namespace V1_3 {
 namespace implementation {
 
 Return<void> Usb::switchRole(const hidl_string &portName __unused,
@@ -75,7 +75,7 @@ Return<void> Usb::setCallback(const sp<IUsbCallback> &callback) {
 }
 
 }  // namespace implementation
-}  // namespace V1_0
+}  // namespace V1_3
 }  // namespace usb
 }  // namespace hardware
 }  // namespace android
