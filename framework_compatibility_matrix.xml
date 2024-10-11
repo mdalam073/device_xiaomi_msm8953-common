@@ -90,7 +90,7 @@
     <!-- Vibrator HAL -->
     <hal format="hidl">
         <name>android.hardware.vibrator</name>
-        <version>2.0</version>
+        <version>1.0</version>
         <transport>hwbinder</transport>
         <interface>
             <name>IVibrator</name>
