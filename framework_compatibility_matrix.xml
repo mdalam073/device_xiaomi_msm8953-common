@@ -46,7 +46,7 @@
     <!-- Health HAL -->
     <hal format="hidl">
         <name>android.hardware.health</name>
-        <version>3.0</version>
+        <version>1.0</version>
         <transport>hwbinder</transport>
         <interface>
             <name>IHealth</name>
