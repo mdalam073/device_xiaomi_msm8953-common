@@ -101,7 +101,7 @@
     <!-- Wifi HAL -->
     <hal format="hidl">
         <name>android.hardware.wifi</name>
-        <version>2.0</version>
+        <version>1.6</version>
         <transport>hwbinder</transport>
         <interface>
             <name>IWifi</name>
@@ -109,30 +109,8 @@
         </interface>
     </hal>
 
-    <!-- Wifi Hostapd HAL -->
     <hal format="hidl">
-        <name>android.hardware.wifi.hostapd</name>
-        <version>2.0</version>
-        <transport>hwbinder</transport>
-        <interface>
-            <name>IHostapd</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-
-    <!-- Wifi Supplicant HAL -->
-    <hal format="hidl">
-        <name>android.hardware.wifi.supplicant</name>
-        <version>3.0</version>
-        <transport>hwbinder</transport>
-        <interface>
-            <name>ISupplicant</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-
-   <hal format="hidl">
-        <name>vendor.qti.hardware.radio.atcmdfwd</name>
+<name>vendor.qti.hardware.radio.atcmdfwd</name>
         <version>1.0</version>
         <interface>
             <name>IAtCmdFwd</name>
