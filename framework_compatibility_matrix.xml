@@ -68,7 +68,7 @@
     <!-- Power HAL -->
     <hal format="hidl">
         <name>android.hardware.power</name>
-        <version>3.0</version>
+        <version>4.0</version>
         <transport>hwbinder</transport>
         <interface>
             <name>IPower</name>
