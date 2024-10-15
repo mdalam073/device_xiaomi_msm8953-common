@@ -1,8 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
 <compatibility-matrix version="1.0" type="framework" level="5">
     <!-- Biometrics Fingerprint HAL -->
     <hal format="hidl" optional="true">
         <name>android.hardware.biometrics.fingerprint</name>
-        <version>2.1-2</version>
+        <version>2.3</version>
         <interface>
             <name>IBiometricsFingerprint</name>
             <instance>default</instance>
@@ -12,7 +13,7 @@
     <!-- Bluetooth Audio Provider HAL -->
     <hal format="hidl" optional="true">
         <name>android.hardware.bluetooth</name>
-        <version>1.0-1</version>
+        <version>1.1</version>
         <interface>
             <name>IBluetoothHci</name>
             <instance>default</instance>
