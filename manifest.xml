@@ -1,4 +1,5 @@
-<<manifest version="1.0" type="device" target-level="5">
+<?xml version="1.0" encoding="utf-8"?>
+<manifest version="1.0" type="device" target-level="5">
   <fcm-version>5</fcm-version> <!-- Ensure you declare the FCM version -->
 
   <hal format="hidl">
