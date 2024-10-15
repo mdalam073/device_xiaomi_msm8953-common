@@ -18,19 +18,11 @@
             <instance>default</instance>
         </interface>
     </hal>
-    <hal format="hidl" optional="true">
-        <name>android.hardware.bluetooth.audio</name>
-        <version>2.0</version>
-        <interface>
-            <name>IBluetoothAudioProvidersFactory</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
 
     <!-- Media CAS HAL -->
     <hal format="hidl" optional="true">
         <name>android.hardware.cas</name>
-        <version>1.1-2</version>
+        <version>1.1</version>
         <interface>
             <name>IMediaCasService</name>
             <instance>default</instance>
@@ -98,7 +90,7 @@
     <!-- USB HAL -->
     <hal format="hidl" optional="true">
         <name>android.hardware.usb</name>
-        <version>1.0-2</version>
+        <version>1.0</version>
         <interface>
             <name>IUsb</name>
             <instance>default</instance>
@@ -106,7 +98,7 @@
     </hal>
     <hal format="hidl" optional="true">
         <name>android.hardware.usb.gadget</name>
-        <version>1.0-1</version>
+        <version>1.0</version>
         <interface>
             <name>IUsbGadget</name>
             <instance>default</instance>
@@ -125,7 +117,7 @@
     <!-- Wifi HAL -->
     <hal format="hidl" optional="true">
         <name>android.hardware.wifi</name>
-        <version>1.0-4</version>
+        <version>1.0</version>
         <interface>
             <name>IWifi</name>
             <instance>default</instance>
@@ -133,7 +125,7 @@
     </hal>
     <hal format="hidl" optional="true">
         <name>android.hardware.wifi.hostapd</name>
-        <version>1.0-2</version>
+        <version>1.0</version>
         <interface>
             <name>IHostapd</name>
             <instance>default</instance>
@@ -141,7 +133,7 @@
     </hal>
     <hal format="hidl" optional="true">
         <name>android.hardware.wifi.supplicant</name>
-        <version>1.0-3</version>
+        <version>1.0</version>
         <interface>
             <name>ISupplicant</name>
             <instance>default</instance>
