@@ -8,6 +8,16 @@
 # Setup dalvik vm configs
 $(call inherit-product, frameworks/native/build/phone-xhdpi-4096-dalvik-heap.mk)
 
+PRODUCT_DYNAMIC_PARTITIONS := true
+
+# List partitions that will be dynamic
+PRODUCT_DYNAMIC_PARTITIONS_GROUP := \
+    system \
+    vendor
+
+# This will ensure that space is allocated dynamically across these partitions
+PRODUCT_SUPER_PARTITION_BLOCK_DEVICES := system vendor
+
 # APEX
 OVERRIDE_PRODUCT_COMPRESSED_APEX := false
 
