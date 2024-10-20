@@ -109,13 +109,17 @@ BOARD_PERSISTIMAGE_PARTITION_SIZE := 33554432  # 32 MB
 BOARD_FLASH_BLOCK_SIZE := 131072  # 128 KB block size
 
 # Use dynamic partitions (super partition)
-BOARD_SUPER_PARTITION_SIZE := 5368709120  # 5 GB for the super partition
+BOARD_SUPER_PARTITION_SIZE := 5500000000  # 5.1 GB for the super partition (adjusted for metadata)
 BOARD_SUPER_PARTITION_BLOCK_DEVICES := system vendor
 BOARD_SUPER_PARTITION_METADATA_DEVICE := system
 
 # Set up dynamic partitions inside the super partition
 BOARD_SUPER_PARTITION_SYSTEM_DEVICE_SIZE := 4294967296  # 4 GB for system (dynamic)
 BOARD_SUPER_PARTITION_VENDOR_DEVICE_SIZE := 1073741824  # 1 GB for vendor (dynamic)
+
+# Explicit partition sizes for system and vendor
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 4294967296  # 4 GB
+BOARD_VENDORIMAGE_PARTITION_SIZE := 1073741824  # 1 GB
 
 # Total size of dynamic partitions
 BOARD_SUPER_PARTITION_GROUPS := tissot_dynamic_partitions
@@ -132,6 +136,9 @@ BOARD_VENDORIMAGE_USE_SPARSE := true
 # Filesystem type
 BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
+
+# Add this line to ensure skip_fsck is included during the vendor image build process
+BOARD_VENDORIMAGE_SKIP_FSCK := true
 
 # Power
 TARGET_USES_INTERACTION_BOOST := true
