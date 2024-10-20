@@ -122,6 +122,9 @@ BOARD_SUPER_PARTITION_GROUPS := tissot_dynamic_partitions
 BOARD_TISSOT_DYNAMIC_PARTITIONS_SIZE := $(shell expr $(BOARD_SUPER_PARTITION_SIZE) - 4194304)
 BOARD_TISSOT_DYNAMIC_PARTITIONS_PARTITION_LIST := system vendor
 
+# Ensure the system knows to copy the vendor partition
+TARGET_COPY_OUT_VENDOR := vendor  # Set to 'vendor' to use a separate vendor image
+
 # Use sparse images for efficient space usage
 BOARD_SYSTEMIMAGE_USE_SPARSE := true
 BOARD_VENDORIMAGE_USE_SPARSE := true
