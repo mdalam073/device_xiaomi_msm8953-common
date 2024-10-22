@@ -104,41 +104,62 @@ TARGET_RECOVERY_DEVICE_MODULES := libinit_msm8953
 TARGET_HEALTH_CHARGING_CONTROL_SUPPORTS_BYPASS := false
 
 # Partitions
-BOARD_BOOTIMAGE_PARTITION_SIZE := 67108864  # 64 MB
-BOARD_PERSISTIMAGE_PARTITION_SIZE := 33554432  # 32 MB
-BOARD_FLASH_BLOCK_SIZE := 131072  # 128 KB block size
+# Flash block size and partition sizes
+BOARD_FLASH_BLOCK_SIZE := 131072 # 128 KB block size
+BOARD_BOOTIMAGE_PARTITION_SIZE := 67108864 # 64 MB Boot image size
+BOARD_RECOVERYIMAGE_PARTITION_SIZE := 67108864 # 64 MB Recovery image size
+BOARD_CACHEIMAGE_PARTITION_SIZE := 268435456 # 256 MB Cache image size
 
-# Use dynamic partitions (super partition)
-BOARD_SUPER_PARTITION_SIZE := 5500000000  # 5.1 GB for the super partition (adjusted for metadata)
+# Use ext4 and f2fs for user images
+BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
+TARGET_USERIMAGES_USE_EXT4 := true
+TARGET_USERIMAGES_USE_F2FS := true
+
+# Core and additional partitions
+CORE_PARTITIONS := system vendor
+ADDITIONAL_PARTITIONS := odm product system_ext
+ALL_PARTITIONS := $(CORE_PARTITIONS) $(ADDITIONAL_PARTITIONS)
+
+# Set filesystem type for all partitions to ext4
+$(foreach p, $(call to-upper, $(ALL_PARTITIONS)), \
+    $(eval BOARD_$(p)IMAGE_FILE_SYSTEM_TYPE := ext4) \
+    $(eval TARGET_COPY_OUT_$(p) := $(call to-lower, $(p))))
+
+# Dynamic partitioning setup
 BOARD_SUPER_PARTITION_BLOCK_DEVICES := system vendor
+BOARD_USES_METADATA_PARTITION := true
 BOARD_SUPER_PARTITION_METADATA_DEVICE := system
+BOARD_SUPER_PARTITION_SIZE := 5368709120  # 5 GB Super partition
 
-# Set up dynamic partitions inside the super partition
-BOARD_SUPER_PARTITION_SYSTEM_DEVICE_SIZE := 4294967296  # 4 GB for system (dynamic)
-BOARD_SUPER_PARTITION_VENDOR_DEVICE_SIZE := 1073741824  # 1 GB for vendor (dynamic)
+# Adjust sizes for system and vendor partitions inside the super partition
+BOARD_SUPER_PARTITION_SYSTEM_DEVICE_SIZE := 3221225472 # 3 GB System partition size
+BOARD_SUPER_PARTITION_VENDOR_DEVICE_SIZE := 2147483648 # 2 GB Vendor partition size
 
-# Explicit partition sizes for system and vendor
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 4294967296  # 4 GB
-BOARD_VENDORIMAGE_PARTITION_SIZE := 1073741824  # 1 GB
-
-# Total size of dynamic partitions
+# Dynamic partition groups and sizes
 BOARD_SUPER_PARTITION_GROUPS := tissot_dynamic_partitions
-BOARD_TISSOT_DYNAMIC_PARTITIONS_SIZE := $(shell expr $(BOARD_SUPER_PARTITION_SIZE) - 4194304)
+BOARD_TISSOT_DYNAMIC_PARTITIONS_SIZE := $(shell expr $(BOARD_SUPER_PARTITION_SIZE) - 4194304) # Reserve 4MB
 BOARD_TISSOT_DYNAMIC_PARTITIONS_PARTITION_LIST := system vendor
 
-# Ensure the system knows to copy the vendor partition
-TARGET_COPY_OUT_VENDOR := vendor  # Set to 'vendor' to use a separate vendor image
+# Reserved sizes for system, vendor, product, etc.
+BOARD_SYSTEMIMAGE_PARTITION_RESERVED_SIZE := 20971520 # 20 MB reserved for system image
+BOARD_SYSTEM_EXTIMAGE_PARTITION_RESERVED_SIZE := 20971520 # 20 MB reserved for system_ext image
+BOARD_PRODUCTIMAGE_PARTITION_RESERVED_SIZE := 20971520 # 20 MB reserved for product image
+BOARD_VENDORIMAGE_PARTITION_RESERVED_SIZE := 20971520 # 20 MB reserved for vendor image
+BOARD_ODMIMAGE_PARTITION_RESERVED_SIZE := 20971520 # 20 MB reserved for ODM image
 
-# Use sparse images for efficient space usage
-BOARD_SYSTEMIMAGE_USE_SPARSE := true
-BOARD_VENDORIMAGE_USE_SPARSE := true
+# Super image config
+INSTALLED_SUPERIMAGE_TARGET := $(PRODUCT_OUT)/super.img
+INSTALLED_SUPERIMAGE_EMPTY_TARGET := $(PRODUCT_OUT)/super_empty.img
 
-# Filesystem type
-BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE := ext4
-BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
+# Extra symlinks for specific mount points
+BOARD_ROOT_EXTRA_SYMLINKS := \
+    /vendor/dsp:/dsp \
+    /vendor/firmware_mnt:/firmware \
+    /vendor/bt_firmware:/bt_firmware \
+    /mnt/vendor/persist:/persist
 
-# Add this line to ensure skip_fsck is included during the vendor image build process
-BOARD_VENDORIMAGE_SKIP_FSCK := true
+# Add configuration for filesystem and partitions
+TARGET_FS_CONFIG_GEN := $(DEVICE_PATH)/config.fs
 
 # Power
 TARGET_USES_INTERACTION_BOOST := true
