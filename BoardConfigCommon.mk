@@ -158,9 +158,6 @@ BOARD_ROOT_EXTRA_SYMLINKS := \
     /vendor/bt_firmware:/bt_firmware \
     /mnt/vendor/persist:/persist
 
-# Add configuration for filesystem and partitions
-TARGET_FS_CONFIG_GEN := $(DEVICE_PATH)/config.fs
-
 # Power
 TARGET_USES_INTERACTION_BOOST := true
 
