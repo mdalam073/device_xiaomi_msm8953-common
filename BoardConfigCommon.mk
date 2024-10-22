@@ -104,6 +104,28 @@ TARGET_RECOVERY_DEVICE_MODULES := libinit_msm8953
 TARGET_HEALTH_CHARGING_CONTROL_SUPPORTS_BYPASS := false
 
 # Partitions
+# Add rule for super_empty.img creation
+INSTALLED_SUPERIMAGE_EMPTY_TARGET := $(PRODUCT_OUT)/super_empty.img
+
+$(INSTALLED_SUPERIMAGE_EMPTY_TARGET): $(INSTALLED_SUPERIMAGE_TARGET)
+	@echo "Creating super_empty.img"
+	cp $(INSTALLED_SUPERIMAGE_TARGET) $(INSTALLED_SUPERIMAGE_EMPTY_TARGET)
+
+# Rule to create dummy image based on super_empty.img if needed
+INSTALLED_SUPERIMAGE_DUMMY_TARGET := $(PRODUCT_OUT)/super_dummy.img
+
+$(INSTALLED_SUPERIMAGE_DUMMY_TARGET): $(INSTALLED_SUPERIMAGE_EMPTY_TARGET)
+	@echo "Creating super_dummy.img from super_empty.img"
+	cp $(INSTALLED_SUPERIMAGE_EMPTY_TARGET) $(INSTALLED_SUPERIMAGE_DUMMY_TARGET)
+
+# Ensure the build system knows these targets
+.PHONY: super_emptyimage super_dummyimage
+super_emptyimage: $(INSTALLED_SUPERIMAGE_EMPTY_TARGET)
+super_dummyimage: $(INSTALLED_SUPERIMAGE_DUMMY_TARGET)
+
+# Add these to final images
+INSTALLED_RADIOIMAGE_TARGET += $(INSTALLED_SUPERIMAGE_DUMMY_TARGET)
+
 # Flash block size and partition sizes
 BOARD_FLASH_BLOCK_SIZE := 131072 # 128 KB block size
 BOARD_BOOTIMAGE_PARTITION_SIZE := 67108864 # 64 MB Boot image size
