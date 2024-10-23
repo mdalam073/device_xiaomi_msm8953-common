@@ -104,33 +104,11 @@ TARGET_RECOVERY_DEVICE_MODULES := libinit_msm8953
 TARGET_HEALTH_CHARGING_CONTROL_SUPPORTS_BYPASS := false
 
 # Partitions
-# Add rule for super_empty.img creation
-INSTALLED_SUPERIMAGE_EMPTY_TARGET := $(PRODUCT_OUT)/super_empty.img
-
-$(INSTALLED_SUPERIMAGE_EMPTY_TARGET): $(INSTALLED_SUPERIMAGE_TARGET)
-	@echo "Creating super_empty.img"
-	cp $(INSTALLED_SUPERIMAGE_TARGET) $(INSTALLED_SUPERIMAGE_EMPTY_TARGET)
-
-# Rule to create dummy image based on super_empty.img if needed
-INSTALLED_SUPERIMAGE_DUMMY_TARGET := $(PRODUCT_OUT)/super_dummy.img
-
-$(INSTALLED_SUPERIMAGE_DUMMY_TARGET): $(INSTALLED_SUPERIMAGE_EMPTY_TARGET)
-	@echo "Creating super_dummy.img from super_empty.img"
-	cp $(INSTALLED_SUPERIMAGE_EMPTY_TARGET) $(INSTALLED_SUPERIMAGE_DUMMY_TARGET)
-
-# Ensure the build system knows these targets
-.PHONY: super_emptyimage super_dummyimage
-super_emptyimage: $(INSTALLED_SUPERIMAGE_EMPTY_TARGET)
-super_dummyimage: $(INSTALLED_SUPERIMAGE_DUMMY_TARGET)
-
-# Add these to final images
-INSTALLED_RADIOIMAGE_TARGET += $(INSTALLED_SUPERIMAGE_DUMMY_TARGET)
-
 # Flash block size and partition sizes
-BOARD_FLASH_BLOCK_SIZE := 131072 # 128 KB block size
-BOARD_BOOTIMAGE_PARTITION_SIZE := 67108864 # 64 MB Boot image size
-BOARD_RECOVERYIMAGE_PARTITION_SIZE := 67108864 # 64 MB Recovery image size
-BOARD_CACHEIMAGE_PARTITION_SIZE := 268435456 # 256 MB Cache image size
+BOARD_FLASH_BLOCK_SIZE := 131072  # 128 KB block size
+BOARD_BOOTIMAGE_PARTITION_SIZE := 67108864  # 64 MB Boot image size
+BOARD_RECOVERYIMAGE_PARTITION_SIZE := 67108864  # 64 MB Recovery image size
+BOARD_CACHEIMAGE_PARTITION_SIZE := 268435456  # 256 MB Cache image size
 
 # Use ext4 and f2fs for user images
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
@@ -154,24 +132,44 @@ BOARD_SUPER_PARTITION_METADATA_DEVICE := system
 BOARD_SUPER_PARTITION_SIZE := 5368709120  # 5 GB Super partition
 
 # Adjust sizes for system and vendor partitions inside the super partition
-BOARD_SUPER_PARTITION_SYSTEM_DEVICE_SIZE := 3221225472 # 3 GB System partition size
-BOARD_SUPER_PARTITION_VENDOR_DEVICE_SIZE := 2147483648 # 2 GB Vendor partition size
+BOARD_SUPER_PARTITION_SYSTEM_DEVICE_SIZE := 3221225472  # 3 GB System partition size
+BOARD_SUPER_PARTITION_VENDOR_DEVICE_SIZE := 2147483648  # 2 GB Vendor partition size
 
 # Dynamic partition groups and sizes
 BOARD_SUPER_PARTITION_GROUPS := tissot_dynamic_partitions
-BOARD_TISSOT_DYNAMIC_PARTITIONS_SIZE := $(shell expr $(BOARD_SUPER_PARTITION_SIZE) - 4194304) # Reserve 4MB
+BOARD_TISSOT_DYNAMIC_PARTITIONS_SIZE := $(shell expr $(BOARD_SUPER_PARTITION_SIZE) - 4194304)  # Reserve 4MB
 BOARD_TISSOT_DYNAMIC_PARTITIONS_PARTITION_LIST := system vendor
 
 # Reserved sizes for system, vendor, product, etc.
-BOARD_SYSTEMIMAGE_PARTITION_RESERVED_SIZE := 20971520 # 20 MB reserved for system image
-BOARD_SYSTEM_EXTIMAGE_PARTITION_RESERVED_SIZE := 20971520 # 20 MB reserved for system_ext image
-BOARD_PRODUCTIMAGE_PARTITION_RESERVED_SIZE := 20971520 # 20 MB reserved for product image
-BOARD_VENDORIMAGE_PARTITION_RESERVED_SIZE := 20971520 # 20 MB reserved for vendor image
-BOARD_ODMIMAGE_PARTITION_RESERVED_SIZE := 20971520 # 20 MB reserved for ODM image
+BOARD_SYSTEMIMAGE_PARTITION_RESERVED_SIZE := 20971520  # 20 MB reserved for system image
+BOARD_SYSTEM_EXTIMAGE_PARTITION_RESERVED_SIZE := 20971520  # 20 MB reserved for system_ext image
+BOARD_PRODUCTIMAGE_PARTITION_RESERVED_SIZE := 20971520  # 20 MB reserved for product image
+BOARD_VENDORIMAGE_PARTITION_RESERVED_SIZE := 20971520  # 20 MB reserved for vendor image
+BOARD_ODMIMAGE_PARTITION_RESERVED_SIZE := 20971520  # 20 MB reserved for ODM image
 
-# Super image config
+# Super image targets
 INSTALLED_SUPERIMAGE_TARGET := $(PRODUCT_OUT)/super.img
 INSTALLED_SUPERIMAGE_EMPTY_TARGET := $(PRODUCT_OUT)/super_empty.img
+
+# Add rule for super_empty.img creation
+$(INSTALLED_SUPERIMAGE_EMPTY_TARGET): $(INSTALLED_SUPERIMAGE_TARGET)
+	@echo "Creating super_empty.img"
+	cp $(INSTALLED_SUPERIMAGE_TARGET) $(INSTALLED_SUPERIMAGE_EMPTY_TARGET)
+
+# Rule to create dummy image based on super_empty.img if needed
+INSTALLED_SUPERIMAGE_DUMMY_TARGET := $(PRODUCT_OUT)/super_dummy.img
+
+$(INSTALLED_SUPERIMAGE_DUMMY_TARGET): $(INSTALLED_SUPERIMAGE_EMPTY_TARGET)
+	@echo "Creating super_dummy.img from super_empty.img"
+	cp $(INSTALLED_SUPERIMAGE_EMPTY_TARGET) $(INSTALLED_SUPERIMAGE_DUMMY_TARGET)
+
+# Ensure the build system knows these targets
+.PHONY: super_emptyimage super_dummyimage
+super_emptyimage: $(INSTALLED_SUPERIMAGE_EMPTY_TARGET)
+super_dummyimage: $(INSTALLED_SUPERIMAGE_DUMMY_TARGET)
+
+# Add these to final images
+INSTALLED_RADIOIMAGE_TARGET += $(INSTALLED_SUPERIMAGE_DUMMY_TARGET)
 
 # Extra symlinks for specific mount points
 BOARD_ROOT_EXTRA_SYMLINKS := \
