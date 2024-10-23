@@ -8,8 +8,9 @@
 # Setup dalvik vm configs
 $(call inherit-product, frameworks/native/build/phone-xhdpi-4096-dalvik-heap.mk)
 
-PRODUCT_DYNAMIC_PARTITIONS := true
-
+# Dynamic Partition
+PRODUCT_USE_DYNAMIC_PARTITIONS := true
+PRODUCT_RETROFIT_DYNAMIC_PARTITIONS := true
 # List partitions that will be dynamic
 PRODUCT_DYNAMIC_PARTITIONS_GROUP := \
     system \
