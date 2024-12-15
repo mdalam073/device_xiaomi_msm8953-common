@@ -6,6 +6,10 @@
 
 -include vendor/lineage-priv/keys/keys.mk
 
+# Dynamic partitions
+PRODUCT_USE_DYNAMIC_PARTITIONS := true
+PRODUCT_RETROFIT_DYNAMIC_PARTITIONS := true
+
 # Setup dalvik vm configs
 $(call inherit-product, frameworks/native/build/phone-xhdpi-4096-dalvik-heap.mk)
 
@@ -68,6 +72,10 @@ PRODUCT_PACKAGES += \
 # Device-specific Settings
 PRODUCT_PACKAGES += \
     XiaomiParts
+
+# Fastbootd
+PRODUCT_PACKAGES += \
+    fastbootd
 
 # Audio
 PRODUCT_PACKAGES += \
