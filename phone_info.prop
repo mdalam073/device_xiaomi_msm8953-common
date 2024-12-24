@@ -1,0 +1,5 @@
+# About phone
+ro.infinity.soc=Snapdragon 625 
+ro.infinity.battery=3080 mAh
+ro.infinity.display=1920x1080, 60 Hz
+ro.infinity.camera=12MP+12MP+5MP
